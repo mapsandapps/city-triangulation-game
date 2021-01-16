@@ -1,0 +1,18 @@
+/* TODO: remove */
+#correctAnswer {
+  min-height: 48px;
+}
+.incorrect {
+  background-color: red;
+}
+.correct {
+  background-color: green;
+}
+
+.correct:after {
+  content: '✅';
+}
+
+.incorrect:after {
+  content: '❌';
+}

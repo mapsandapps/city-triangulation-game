@@ -5,15 +5,24 @@ const NUMBER_OF_CITIES = cities.length
 var correctAnswer
 var remainingCities = _.cloneDeep(cities)
 
-const checkAnswer = (foo, bar) => {
-  console.log(foo)
-  console.log(bar)
+const revealAnswer = () => {
+  document.getElementById('correctAnswer').innerHTML = `${correctAnswer.city}, ${correctAnswer.state}<br><button onclick="location.reload()">Next question</button>`
 }
 
-const chooseAnswer = () => {
-  const chosenCities = _.sampleSize(cities, 4)
+const checkAnswer = (city, state, buttonIndex) => {
+  // TODO: and add check or X
 
-  console.log(chosenCities)
+  if (city === correctAnswer.city && state === correctAnswer.state) {
+    document.getElementById(`option${buttonIndex}`).classList.add('correct')
+    revealAnswer()
+  } else {
+    document.getElementById('correctAnswer').innerHTML = `<button onclick="revealAnswer()">Reveal answer</button>`
+    document.getElementById(`option${buttonIndex}`).classList.add('incorrect')
+  }
+}
+
+const setUpQuestion = () => {
+  const chosenCities = _.sampleSize(cities, 4)
 
   var answerOptions = _.cloneDeep(cities)
   _.pullAt(answerOptions, [
@@ -21,37 +30,33 @@ const chooseAnswer = () => {
     chosenCities[2].index,
     chosenCities[3].index
   ])
-  console.log(answerOptions.length) // should be 47
 
   correctAnswer = chosenCities[0]
   const correctAnswerIndex = correctAnswer.index
 
-  answerOptionsShuffled = _.shuffle(answerOptions)
+  answerOptionsSorted = _.sortBy(answerOptions, ['state', 'city'])
 
   writeHTML({
     chosenCities,
     correctAnswerIndex,
-    answerOptionsShuffled
+    answerOptionsSorted
   })
 }
 
 const writeHTML = ({
   chosenCities,
   correctAnswerIndex,
-  answerOptionsShuffled
+  answerOptionsSorted
 }) => {
   document.getElementById('otherCities').innerHTML = `<div>What city is</div><div> ${chosenCities[1].distances[correctAnswerIndex]} miles from ${chosenCities[1].city}, ${chosenCities[1].state},</div><div>${chosenCities[2].distances[correctAnswerIndex]} miles from ${chosenCities[2].city}, ${chosenCities[2].state}, and</div><div>${chosenCities[3].distances[correctAnswerIndex]} miles from ${chosenCities[3].city}, ${chosenCities[3].state}?</div>`
 
-  document.getElementById('correctAnswer').innerHTML = `${chosenCities[0].city}, ${chosenCities[0].state}`
-
-
   var optionButtonsHTML = ''
 
-  _.map(answerOptionsShuffled, city => {
-    optionButtonsHTML += `<button onclick="checkAnswer('${city.city}', '${city.state}')">${city.city}, ${city.state}</button><br />`
+  _.map(answerOptionsSorted, (city, index) => {
+    optionButtonsHTML += `<button id="option${index}" onclick="checkAnswer('${city.city}', '${city.state}', '${index}')">${city.city}, ${city.state}</button><br />`
   })
 
   document.getElementById('optionButtons').innerHTML = optionButtonsHTML
 }
 
-chooseAnswer()
+setUpQuestion()

@@ -4,47 +4,54 @@ const NUMBER_OF_CITIES = cities.length
 
 var correctAnswer
 var remainingCities = _.cloneDeep(cities)
-console.log(remainingCities.length)
+
+const checkAnswer = (foo, bar) => {
+  console.log(foo)
+  console.log(bar)
+}
 
 const chooseAnswer = () => {
-  const correctAnswerIndex = _.random(NUMBER_OF_CITIES - 1)
-  correctAnswer = remainingCities[correctAnswerIndex]
-  _.pullAt(remainingCities, [correctAnswerIndex])
-  console.log(remainingCities.length)
+  const chosenCities = _.sampleSize(cities, 4)
 
-  // TODO: make sure none of the cities is the same
-  const cityAIndex = _.random(NUMBER_OF_CITIES - 1)
-  _.pullAt(remainingCities, [cityAIndex])
-  console.log(remainingCities.length)
-  const cityBIndex = _.random(NUMBER_OF_CITIES - 1)
-  _.pullAt(remainingCities, [cityBIndex])
-  console.log(remainingCities.length)
-  const cityCIndex = _.random(NUMBER_OF_CITIES - 1)
-  _.pullAt(remainingCities, [cityCIndex])
-  console.log(remainingCities.length)
-  const cityA = cities[cityAIndex]
-  const cityB = cities[cityBIndex]
-  const cityC = cities[cityCIndex]
+  console.log(chosenCities)
 
+  var answerOptions = _.cloneDeep(cities)
+  _.pullAt(answerOptions, [
+    chosenCities[1].index,
+    chosenCities[2].index,
+    chosenCities[3].index
+  ])
+  console.log(answerOptions.length) // should be 47
 
-  document.getElementById('cityA').innerHTML = `${cityA.city}, ${cityA.state}: ${cityA.distances[correctAnswerIndex]} mi`
-  document.getElementById('cityB').innerHTML = `${cityB.city}, ${cityB.state}: ${cityB.distances[correctAnswerIndex]} mi`
-  document.getElementById('cityC').innerHTML = `${cityC.city}, ${cityC.state}: ${cityC.distances[correctAnswerIndex]} mi`
-  document.getElementById('correctAnswer').innerHTML = `${correctAnswer.city}, ${correctAnswer.state}`
+  correctAnswer = chosenCities[0]
+  const correctAnswerIndex = correctAnswer.index
 
-  const answerOptions = _.cloneDeep(remainingCities)
-  answerOptions.push(correctAnswer)
   answerOptionsShuffled = _.shuffle(answerOptions)
-  // TODO: shuffle answerOptions
+
+  writeHTML({
+    chosenCities,
+    correctAnswerIndex,
+    answerOptionsShuffled
+  })
+}
+
+const writeHTML = ({
+  chosenCities,
+  correctAnswerIndex,
+  answerOptionsShuffled
+}) => {
+  document.getElementById('otherCities').innerHTML = `<div>What city is</div><div> ${chosenCities[1].distances[correctAnswerIndex]} miles from ${chosenCities[1].city}, ${chosenCities[1].state},</div><div>${chosenCities[2].distances[correctAnswerIndex]} miles from ${chosenCities[2].city}, ${chosenCities[2].state}, and</div><div>${chosenCities[3].distances[correctAnswerIndex]} miles from ${chosenCities[3].city}, ${chosenCities[3].state}?</div>`
+
+  document.getElementById('correctAnswer').innerHTML = `${chosenCities[0].city}, ${chosenCities[0].state}`
+
+
   var optionButtonsHTML = ''
 
   _.map(answerOptionsShuffled, city => {
-    optionButtonsHTML += `<button>${city.city}, ${city.state}</button>`
+    optionButtonsHTML += `<button onclick="checkAnswer('${city.city}', '${city.state}')">${city.city}, ${city.state}</button><br />`
   })
 
   document.getElementById('optionButtons').innerHTML = optionButtonsHTML
 }
-
-
 
 chooseAnswer()

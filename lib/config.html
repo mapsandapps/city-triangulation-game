@@ -6,9 +6,18 @@
   <title>City Triangulation Game - Config</title>
 </head>
 <body>
+  How to use this:
+  <ul>
+    <li>Create a js file with the pack</li>
+    <li>Put the js file in this directory and change the import below to import it instead of another one</li>
+    <li>Open this page in a browser using <code>http-server</code> or similar</li>
+    <li>Open the JS console & see the stuff that's logged</li>
+    <li>Use that info to fine-tune the pack, e.g. by removing any cities that are too close to each other</li>
+    <li>Once it's fine-tuned, copy the output of <code>JSON.stringify(cityData)</code> and create a file with that to add to <code>/dist</code></li>
+  </ul>
 
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
-  <script src="50-largest-us-cities-at-least-50-mi-apart.js"></script>
+  <script src="southeastern-cities-at-least-20-miles-apart.js"></script>
   <script src="distance.js"></script>
   <script src="config.js"></script>
 </body>

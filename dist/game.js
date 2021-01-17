@@ -40,8 +40,8 @@ const checkAnswer = (city, state, buttonIndex) => {
   }
 }
 
-const initMap = () => {
-  map = L.map('map').setView([38, -99], 4)
+const initMap = (lat, lon, zoom) => {
+  map = L.map('map').setView([lat || 38, lon || -99], zoom || 4)
   map.removeControl(map.zoomControl)
   map.touchZoom.disable()
   map.doubleClickZoom.disable()
@@ -56,7 +56,7 @@ const initMap = () => {
   }).addTo(map)
 }
 
-const setUpQuestion = () => {
+const setUpQuestion = (config) => {
   chosenCities = _.sampleSize(cities, 4)
 
   correctAnswer = chosenCities[0]
@@ -92,7 +92,7 @@ const setUpQuestion = () => {
     answerOptionsSorted
   })
 
-  initMap()
+  initMap(config.lat, config.lon, config.zoom)
 }
 
 const writeHTML = ({
@@ -100,6 +100,7 @@ const writeHTML = ({
   correctAnswerIndex,
   answerOptionsSorted
 }) => {
+  console.log(chosenCities)
   document.getElementById('otherCities').innerHTML = `<div>What city is</div><div> ${chosenCities[1].distances[correctAnswerIndex]} miles from ${chosenCities[1].city}, ${chosenCities[1].state},</div><div>${chosenCities[2].distances[correctAnswerIndex]} miles from ${chosenCities[2].city}, ${chosenCities[2].state}, and</div><div>${chosenCities[3].distances[correctAnswerIndex]} miles from ${chosenCities[3].city}, ${chosenCities[3].state}?</div>`
 
   var optionButtonsHTML = ''
@@ -110,5 +111,3 @@ const writeHTML = ({
 
   document.getElementById('optionButtons').innerHTML = optionButtonsHTML
 }
-
-setUpQuestion()

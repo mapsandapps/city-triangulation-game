@@ -53,7 +53,7 @@ const writeHTML = ({
   var optionButtonsHTML = ''
 
   _.map(answerOptionsSorted, (city, index) => {
-    optionButtonsHTML += `<button id="option${index}" onclick="checkAnswer('${city.city}', '${city.state}', '${index}')">${city.city}, ${city.state}</button><br />`
+    optionButtonsHTML += `<button id="option${index}" onclick="checkAnswer('${city.city}', '${city.state}', '${index}')"><span class="city">${city.city}</span><br /><span class="state">${city.state}</span></button>`
   })
 
   document.getElementById('optionButtons').innerHTML = optionButtonsHTML

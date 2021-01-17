@@ -16,3 +16,8 @@ html, body {
   background-color: #207CC9;
   font-family: 'LeagueSpartan';
 }
+
+button {
+  -webkit-appearance: none;
+  background-color: rgb(239, 239, 239);
+}

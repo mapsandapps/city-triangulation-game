@@ -1,6 +1,8 @@
 // @ts-nocheck
 
 const NUMBER_OF_CITIES = cities.length
+const NUMBER_OF_OPTIONS = 12 // ignored if SHOW_ALL_OPTIONS = true
+const SHOW_ALL_OPTIONS = false
 
 var chosenCities
 var correctAnswer
@@ -57,17 +59,32 @@ const initMap = () => {
 const setUpQuestion = () => {
   chosenCities = _.sampleSize(cities, 4)
 
-  var answerOptions = _.cloneDeep(cities)
-  _.pullAt(answerOptions, [
-    chosenCities[1].index,
-    chosenCities[2].index,
-    chosenCities[3].index
-  ])
-
   correctAnswer = chosenCities[0]
   const correctAnswerIndex = correctAnswer.index
 
-  answerOptionsSorted = _.sortBy(answerOptions, ['state', 'city'])
+  if (SHOW_ALL_OPTIONS) {
+    var answerOptions = _.cloneDeep(cities)
+    _.pullAt(answerOptions, [
+      chosenCities[1].index,
+      chosenCities[2].index,
+      chosenCities[3].index
+    ])
+
+    answerOptionsSorted = _.sortBy(answerOptions, ['state', 'city'])
+  } else {
+    var answerOptions = _.cloneDeep(cities)
+    _.pullAt(answerOptions, [
+      chosenCities[0].index,
+      chosenCities[1].index,
+      chosenCities[2].index,
+      chosenCities[3].index
+    ])
+
+    answerOptionsShortened = _.sampleSize(answerOptions, NUMBER_OF_OPTIONS - 1)
+    answerOptionsShortened.push(correctAnswer)
+
+    answerOptionsSorted = _.sortBy(answerOptionsShortened, ['city', 'state'])
+  }
 
   writeHTML({
     chosenCities,

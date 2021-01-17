@@ -20,4 +20,11 @@ html, body {
 button {
   -webkit-appearance: none;
   background-color: rgb(239, 239, 239);
+  border: 1px solid rgb(118, 118, 118);
+  cursor: pointer;
+  min-height: 6vw;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }

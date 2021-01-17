@@ -7,13 +7,11 @@
 }
 
 #top button {
-  font-size: 2.5vw;
+  font-size: 3vw;
 }
 
 button {
-  cursor: pointer;
   font-size: 1.5vw;
-  min-height: 6vw;
 }
 
 #correctAnswer {
@@ -21,24 +19,34 @@ button {
   min-height: 12vw;
 }
 .incorrect {
-  background-color: red;
+  background-color: #d32119;
 }
 .correct {
-  background-color: green;
+  background-color: #fbce0d;
 }
 
-.correct:after {
-  content: '✅';
+.city:after {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 1.5vw 1.5vw;
+  display: inline-block;
+  margin-left: 0.5vw;
+  width: 1.5vw;
+  height: 1.5vw;
+  content: '';
 }
 
-.incorrect:after {
-  content: '❌';
+.correct .city:after {
+  background-image: url(assets/check.png);
+}
+
+.incorrect .city:after {
+  background-image: url(assets/cross.png);
 }
 
 #optionButtons {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  /* overflow-y: scroll; */
 }
 
 #optionButtons button {
@@ -46,7 +54,7 @@ button {
 }
 
 #optionButtons .city {
-  font-size: 2vw;
+  font-size: 2.1vw;
 }
 
 #map {
@@ -57,7 +65,7 @@ button {
   text-align: center;
 }
 
-@media only screen and (max-width: 799px) {
+/* @media only screen and (max-width: 799px) {
   #optionButtons {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -65,9 +73,9 @@ button {
   #optionButtons button {
     width: 20vw;
   }
-}
+} */
 
-@media only screen and (max-width: 679px) {
+@media only screen and (max-width: 749px) {
   #optionButtons {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -77,11 +85,17 @@ button {
   }
 
   #optionButtons .city {
-    font-size: 3vw;
+    font-size: 2.7vw;
   }
 
   #optionButtons .state {
     font-size: 2vw;
+  }
+
+  .city:after {
+    background-size: 2vw 2vw;
+    width: 2vw;
+    height: 2vw;
   }
 }
 
@@ -95,7 +109,13 @@ button {
   }
 
   #optionButtons .city {
-    font-size: 4vw;
+    font-size: 3.7vw;
+  }
+
+  .city:after {
+    background-size: 3vw 3vw;
+    width: 3vw;
+    height: 3vw;
   }
 }
 
@@ -114,5 +134,11 @@ button {
 
   #optionButtons .state {
     font-size: 3vw;
+  }
+
+  .city:after {
+    background-size: 4vw 4vw;
+    width: 4vw;
+    height: 4vw;
   }
 }

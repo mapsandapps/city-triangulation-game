@@ -10,7 +10,9 @@ Inspired by a game played in episode 1 of the 2020 season of [De Mol](https://en
 
 # Credits
 
+* [Carto basemap](https://carto.com/help/building-maps/basemap-list/)
 * [Haversine package](https://github.com/njj/haversine)
+* [Leaflet](https://leafletjs.com/)
 * [Lodash](https://lodash.com/)
 * [normalize.css](https://github.com/necolas/normalize.css/)
 * [Wikipedia: "List of United States cities by population"](https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population)

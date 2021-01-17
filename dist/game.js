@@ -2,27 +2,60 @@
 
 const NUMBER_OF_CITIES = cities.length
 
+var chosenCities
 var correctAnswer
+var isAnswerRevealed
+var map
 var remainingCities = _.cloneDeep(cities)
 
 const revealAnswer = () => {
   document.getElementById('correctAnswer').innerHTML = `${correctAnswer.city}, ${correctAnswer.state}<br><button onclick="location.reload()">Next question</button>`
+
+  _.forEach(chosenCities, city => {
+    L.marker([city.lat, city.lon]).addTo(map)
+      .bindPopup(`<b>${city.city}</b><br>${city.state}`)
+  })
+
+  map.addControl(map.zoomControl)
+  map.touchZoom.enable()
+  map.doubleClickZoom.enable()
+  map.scrollWheelZoom.enable()
+  map.boxZoom.enable()
+  map.keyboard.enable()
+
+  isAnswerRevealed = true
 }
 
 const checkAnswer = (city, state, buttonIndex) => {
-  // TODO: and add check or X
-
   if (city === correctAnswer.city && state === correctAnswer.state) {
     document.getElementById(`option${buttonIndex}`).classList.add('correct')
     revealAnswer()
   } else {
-    document.getElementById('correctAnswer').innerHTML = `<button onclick="revealAnswer()">Reveal answer</button>`
+    if (!isAnswerRevealed) {
+      document.getElementById('correctAnswer').innerHTML = `<button onclick="revealAnswer()">Reveal answer</button>`
+    }
     document.getElementById(`option${buttonIndex}`).classList.add('incorrect')
   }
 }
 
+const initMap = () => {
+  map = L.map('map').setView([38, -99], 4)
+  map.removeControl(map.zoomControl)
+  map.touchZoom.disable()
+  map.doubleClickZoom.disable()
+  map.scrollWheelZoom.disable()
+  map.boxZoom.disable()
+  map.keyboard.disable()
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map)
+}
+
 const setUpQuestion = () => {
-  const chosenCities = _.sampleSize(cities, 4)
+  chosenCities = _.sampleSize(cities, 4)
 
   var answerOptions = _.cloneDeep(cities)
   _.pullAt(answerOptions, [
@@ -41,6 +74,8 @@ const setUpQuestion = () => {
     correctAnswerIndex,
     answerOptionsSorted
   })
+
+  initMap()
 }
 
 const writeHTML = ({

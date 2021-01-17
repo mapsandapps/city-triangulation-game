@@ -1,4 +1,4 @@
-# City Triangulation Game
+# City Triangulation Quiz
 
 Inspired by a game played in episode 1 of the 2020 season of [De Mol](https://en.wikipedia.org/wiki/De_Mol_(TV_series)).
 

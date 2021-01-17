@@ -3,19 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>City Triangulation Game</title>
+  <title>City Triangulation Quiz</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      text-align: center;
+    }
+    h1 {
+      font-size: 4.7vw;
+    }
+    h2 {
+      font-size: 3vw;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0px;
+      margin: 0px;
+    }
+    li {
+      list-style: none;
+      padding-bottom: 1vw;
+    }
+    button {
+      cursor: pointer;
+      font-size: 2vw;
+      min-height: 6vw;
+      min-width: 16.66vw;
+    }
+    button:disabled {
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 <body>
-  <div id="top">
-    <div id="otherCities"></div>
-    <div id="correctAnswer"></div>
-    <div id="optionButtons"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
-  <script src="us-data.js"></script>
-  <script src="game.js"></script>
+  <h1>City Triangulation Quiz</h1>
+  <h2>Choose your city pack:</h2>
+  <ul>
+    <li><a href="us.html"><button>U.S. cities</button></a></li>
+    <li><button disabled>More coming soon</button></li>
+  </ul>
 </body>
 </html>

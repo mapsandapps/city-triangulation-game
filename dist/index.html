@@ -40,7 +40,15 @@
   <ul>
     <li><a href="us.html"><button>U.S. cities</button></a></li>
     <li><a href="southeast.html"><button>Southeastern U.S. cities (MS, AL, GA, TN, NC, SC, FL)</button></a></li>
-    <li><button disabled>More coming soon</button></li>
+    <li><button disabled>More coming soon (leave a comment to request one!)</button></li>
   </ul>
+  <div style="height: 20vw;"></div>
+  <h2>Settings:</h2>
+  <div class="button-group" data="units">
+    <button data="miles" onclick="changeSetting(this, 'units', 'miles')">Miles</button>
+    <button data="kilometers" onclick="changeSetting(this, 'units', 'kilometers')">Kilometers</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

@@ -18,4 +18,5 @@ Play on [itch.io](https://mapsandapps.itch.io/city-triangulation-quiz).
 * [League Spartan font](https://www.theleagueofmoveabletype.com/league-spartan)
 * [Lodash](https://lodash.com/)
 * [normalize.css](https://github.com/necolas/normalize.css/)
+* [OpenStreetMap](https://www.openstreetmap.org/)
 * [Wikipedia: "List of United States cities by population"](https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population)

@@ -9,6 +9,7 @@ var correctAnswer
 var isAnswerRevealed
 var map
 var remainingCities = _.cloneDeep(cities)
+var units = localStorage.units || 'miles'
 
 const revealAnswer = () => {
   document.getElementById('correctAnswer').innerHTML = `${correctAnswer.city}, ${correctAnswer.state}<br><button onclick="location.reload()">Next question</button>`
@@ -95,13 +96,20 @@ const setUpQuestion = (config) => {
   initMap(config.lat, config.lon, config.zoom)
 }
 
+const getDistanceString = (distanceInMiles) => {
+  if (units === 'kilometers') {
+    return `${_.round(distanceInMiles * 1.60934)} km`
+  } else {
+    return `${distanceInMiles} miles`
+  }
+}
+
 const writeHTML = ({
   chosenCities,
   correctAnswerIndex,
   answerOptionsSorted
 }) => {
-  console.log(chosenCities)
-  document.getElementById('otherCities').innerHTML = `<div>What city is</div><div> ${chosenCities[1].distances[correctAnswerIndex]} miles from ${chosenCities[1].city}, ${chosenCities[1].state},</div><div>${chosenCities[2].distances[correctAnswerIndex]} miles from ${chosenCities[2].city}, ${chosenCities[2].state}, and</div><div>${chosenCities[3].distances[correctAnswerIndex]} miles from ${chosenCities[3].city}, ${chosenCities[3].state}?</div>`
+  document.getElementById('otherCities').innerHTML = `<div>What city is</div><div> ${getDistanceString(chosenCities[1].distances[correctAnswerIndex])} from ${chosenCities[1].city}, ${chosenCities[1].state},</div><div>${getDistanceString(chosenCities[2].distances[correctAnswerIndex])} from ${chosenCities[2].city}, ${chosenCities[2].state}, and</div><div>${getDistanceString(chosenCities[3].distances[correctAnswerIndex])} from ${chosenCities[3].city}, ${chosenCities[3].state}?</div>`
 
   var optionButtonsHTML = ''
 

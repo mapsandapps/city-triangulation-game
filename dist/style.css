@@ -28,3 +28,33 @@ button {
 button:disabled {
   cursor: not-allowed;
 }
+
+.button-group {
+  /* float: left; */
+  display: flex;
+  justify-content: center;
+}
+
+.button-group button {
+  min-width: 30vw;
+}
+
+.button-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+.button-group button.active {
+  background-color: #fbce0d;
+}
+
+.button-group button.active:after {
+  background-image: url(assets/check.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 2.5vw 2.5vw;
+  display: inline-block;
+  margin-left: 0.5vw;
+  width: 2.5vw;
+  height: 2.5vw;
+  content: '';
+}

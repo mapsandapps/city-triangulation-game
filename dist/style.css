@@ -1,111 +1,18 @@
-#top {
-  font-size: 4.7vw;
-  text-align: center;
+@font-face {
+  font-family: "LeagueSpartan";
+  src: url("fonts/LeagueSpartan-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-button {
-  cursor: pointer;
-  font-size: 1.5vw;
-  min-height: 6vw;
+@font-face {
+  font-family: "LeagueSpartan";
+  src: url("fonts/LeagueSpartan-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 
-#correctAnswer {
-  color: #4080C4;
-  min-height: 12vw;
-}
-.incorrect {
-  background-color: red;
-}
-.correct {
-  background-color: green;
-}
-
-.correct:after {
-  content: '✅';
-}
-
-.incorrect:after {
-  content: '❌';
-}
-
-#optionButtons {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  /* overflow-y: scroll; */
-}
-
-#optionButtons button {
-  width: 16.66vw;
-}
-
-#optionButtons .city {
-  font-size: 2vw;
-}
-
-#map {
-  height: 400px;
-}
-
-.leaflet-popup-content {
-  text-align: center;
-}
-
-@media only screen and (max-width: 799px) {
-  #optionButtons {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  #optionButtons button {
-    width: 20vw;
-  }
-}
-
-@media only screen and (max-width: 679px) {
-  #optionButtons {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  #optionButtons button {
-    width: 25vw;
-  }
-
-  #optionButtons .city {
-    font-size: 3vw;
-  }
-
-  #optionButtons .state {
-    font-size: 2vw;
-  }
-}
-
-@media only screen and (max-width: 559px) {
-  #optionButtons {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  #optionButtons button {
-    width: 33.33vw;
-  }
-
-  #optionButtons .city {
-    font-size: 4vw;
-  }
-}
-
-@media only screen and (max-width: 399px) {
-  #optionButtons {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  #optionButtons button {
-    width: 50vw;
-  }
-
-  #optionButtons .city {
-    font-size: 5vw;
-  }
-
-  #optionButtons .state {
-    font-size: 3vw;
-  }
+html, body {
+  background-color: #207CC9;
+  font-family: 'LeagueSpartan';
 }
